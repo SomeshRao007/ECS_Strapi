@@ -9,13 +9,14 @@ resource "aws_ecs_service" "nodeapp" {
   deployment_maximum_percent         = 200
   desired_count                      = 1
 
-  depends_on = [aws_lb_listener.Listener, aws_iam_role.iam-role]
+  depends_on = [aws_iam_role.iam-role]
 
-  load_balancer {
-    target_group_arn = aws_lb_target_group.HelloTG.arn
-    container_name   = "main-container"
-    container_port   = 1337
-  }
+  # aws_lb_listener.Listener
+  #load_balancer {
+  #   target_group_arn = aws_lb_target_group.HelloTG.arn
+  #   container_name   = "main-container"
+  #   container_port   = 1337
+  # }
 
   network_configuration {
     assign_public_ip = true
